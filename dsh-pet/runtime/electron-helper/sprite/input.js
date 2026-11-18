@@ -385,6 +385,7 @@ Object.assign(PetSprite.prototype, {
       this.pressScoreFired = false;
       this.stopThrow();
       this.stopMove();
+      this.openChatOrFocus();
       return;
     }
     this.stopThrow(); // 点击飞行中的宠物 = 收手停住（再播点击回应）
@@ -409,9 +410,11 @@ Object.assign(PetSprite.prototype, {
     }
     // 点击音效与浏览器同位置：放在「按下已触发积分」的早退之后、点击动画判断之前
     playClickSound();
-    if (!this.animations.clicks.length) return;
-    this.pendingSquash = true; // 等新点击动画切到前台后 Q 弹（压新首帧，与浏览器一致）
-    this.playOnce(S.pick(this.animations.clicks));
+    if (this.animations.clicks.length) {
+      this.pendingSquash = true; // 等新点击动画切到前台后 Q 弹（压新首帧，与浏览器一致）
+      this.playOnce(S.pick(this.animations.clicks));
+    }
+    this.openChatOrFocus();
   },
 
   // 右键菜单（统一自绘组件：树与渲染都来自 shared-core 的同一份 menu 模块）

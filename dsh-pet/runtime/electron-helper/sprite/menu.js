@@ -330,6 +330,16 @@ Object.assign(PetSprite.prototype, {
     this.setInteractive(true);
   },
 
+  /** 打开对话弹窗；已经打开时保留草稿并聚焦输入框。 */
+  openChatOrFocus() {
+    if (!this.chatMount) {
+      this.showChatFromMenu();
+      return;
+    }
+    const input = this.chatMount.el.querySelector('.dsh-pet-chat-input');
+    if (input) input.focus();
+  },
+
   // 快捷键「按住 M 说话」的两端：按下时若没有弹窗就先开一个，再让它开录；松开只收尾、不关窗，
   // 识别结果落进输入框等用户确认（不自动发送）。
   startHearChat() {

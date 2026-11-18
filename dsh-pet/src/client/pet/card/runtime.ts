@@ -317,6 +317,7 @@ export function createCardRuntime(rt: PetRuntime) {
         // 入睡过渡里被点：这次入睡作废，按普通点击处理（挤压 + 音效 + 点击回应），不再播「起来」
         if (phase === 'start') void postAction(ROUTE_PATH + '/wake?pet=' + encodeURIComponent(cfg.id));
         drag.onClick();
+        entry.openChatOrFocus();
       },
       onContextMenu: entry.handleContextMenu,
       onPointerDown: drag.onPointerDown,

@@ -81,6 +81,8 @@ export interface CardEntry {
   handleContextMenu: (e: ReactNS.MouseEvent<HTMLDivElement>) => void;
   /** 打开对话弹窗：菜单里「对话」那一项走这里；带图时直接进入待发送状态（拖拽用）。 */
   openChat: (image?: File) => void;
+  /** 打开对话弹窗；已经打开时保留草稿并聚焦输入框。 */
+  openChatOrFocus: () => void;
   /** 打开待办面板（右键菜单入口）。 */
   openTodo: () => void;
   /** 指针进入：先摆位再显示。 */
@@ -404,6 +406,7 @@ export function createCardEntry(rt: CardEntryRuntime) {
         card.actions.setTipOn(false);
       },
       openChat,
+      openChatOrFocus,
       openTodo,
       placeTip,
     };
